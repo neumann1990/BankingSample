@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Banking.Tests
 {
-    public class WithdrawalTestData_StartPosEndNeg : IEnumerable<object[]>
+    public class Withdrawal_StartPosEndNeg : IEnumerable<object[]>
     {
         public IEnumerator<object[]> GetEnumerator()
         {

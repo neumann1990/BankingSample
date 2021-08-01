@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Banking.Tests
 {
-    public class DepositTestData_InvalidValues : IEnumerable<object[]>
+    public class Deposit_InvalidValues : IEnumerable<object[]>
     {
         public IEnumerator<object[]> GetEnumerator()
         {
