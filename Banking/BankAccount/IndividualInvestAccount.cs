@@ -6,9 +6,9 @@ namespace Banking.BankAccounts
     {
         public static decimal WithdrawalLimit = 500;
 
-        public Guid Id { get; set; } = Guid.NewGuid();
-        public IOwner Owner { get; set; }
-        public decimal Balance { get; set; }
+        public Guid Id { get; private set; } = Guid.NewGuid();
+        public IOwner Owner { get; private set; }
+        public decimal Balance { get; private set; }
 
         public ITransaction Deposit(decimal amount)
         {
