@@ -24,17 +24,27 @@ namespace Banking.BankAccount
 
         public void Deposit(decimal amount)
         {
-            throw new System.NotImplementedException();
-        }
+            if (amount <= 0)
+            {
+                throw new ArgumentException("Deposit amount must be a positive value");
+            }
 
-        public void Transfer(decimal amount)
-        {
-            throw new System.NotImplementedException();
+            Balance += amount;
         }
 
         public void Withdrawal(decimal amount)
         {
-            throw new System.NotImplementedException();
+            if (amount <= 0)
+            {
+                throw new ArgumentException("Withdrawal amount must be a positive value");
+            }
+
+            Balance -= amount;
+        }
+
+        public void Transfer(decimal amount)
+        {
+            Balance += amount;
         }
     }
 }
