@@ -1,8 +1,10 @@
-﻿namespace Banking.BankAccounts
+﻿using System;
+
+namespace Banking.BankAccounts
 {
     public interface IAccount
     {
-        string Id { get; set; }
+        Guid Id { get; set; }
         IOwner Owner { get; set; }
         decimal Balance { get; set; }
 

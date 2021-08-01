@@ -1,10 +1,12 @@
-﻿namespace Banking.BankAccounts
+﻿using System;
+
+namespace Banking.BankAccounts
 {
     public class IndividualInvestAccount : IInvestmentAccount, IAccount
     {
         public static decimal WithdrawalLimit = 500;
 
-        public string Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
         public IOwner Owner { get; set; }
         public decimal Balance { get; set; }
 

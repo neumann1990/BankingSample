@@ -1,8 +1,10 @@
-﻿namespace Banking.BankAccounts
+﻿using System;
+
+namespace Banking.BankAccounts
 {
     public class CorporateInvestAccount : IInvestmentAccount, IAccount
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
         public IOwner Owner { get; set; }
         public decimal Balance { get; set; }
 
