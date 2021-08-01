@@ -32,7 +32,7 @@ namespace Banking.Tests
         public void Withdrawal_InvalidValues(decimal startBalance, decimal withdrawalAmount)
         {
             var account = new CorporateInvestAccount(startBalance);
-            Assert.Throws<ArgumentException>(() => account.Withdrawal(withdrawalAmount));
+            Assert.Throws<ArgumentOutOfRangeException>(() => account.Withdrawal(withdrawalAmount));
         }
 
 
@@ -59,7 +59,7 @@ namespace Banking.Tests
         public void Deposit_InvalidValues(decimal startBalance, decimal depositAmount)
         {
             var account = new CorporateInvestAccount(startBalance);
-            Assert.Throws<ArgumentException>(() => account.Deposit(depositAmount));
+            Assert.Throws<ArgumentOutOfRangeException>(() => account.Deposit(depositAmount));
         }
 
         [Theory]

@@ -24,7 +24,7 @@ namespace Banking.BankAccount
         {
             if (amount <= 0)
             {
-                throw new ArgumentException("Deposit amount must be a positive value");
+                throw new ArgumentOutOfRangeException("Deposit amount must be a positive value");
             }
 
             Balance += amount;
@@ -34,7 +34,7 @@ namespace Banking.BankAccount
         {
             if (amount <= 0)
             {
-                throw new ArgumentException("Withdrawal amount must be a positive value");
+                throw new ArgumentOutOfRangeException("Withdrawal amount must be a positive value");
             }
 
             Balance -= amount;

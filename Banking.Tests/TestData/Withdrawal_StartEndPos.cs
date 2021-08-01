@@ -5,18 +5,26 @@ namespace Banking.Tests
 {
     public class Withdrawal_StartEndPos : IEnumerable<object[]>
     {
+        public static List<object[]> TestData = new List<object[]>
+        {
+            new object[] { 1m, .999999999m, .000000001m },
+            new object[] { 1.50m, 1.495m, .005m,},
+            new object[] { 1.5555m, 1.5554m, .0001m,},
+            new object[] { 99.99m, .99m, 99m,},
+            new object[] { 100m, 1m, 99m,},
+            new object[] { 100m, .01m, 99.99m,},
+            new object[] { 100m, 20.99m, 79.01m,},
+            new object[] { 100m, 20.99999m, 79.00001m,},
+            new object[] { 100m, 100m, 0m,},
+            new object[] { 1000000000m, .000000001m, 999999999.999999999m },
+        };
+
         public IEnumerator<object[]> GetEnumerator()
         {
-            yield return new object[] { 1, .999999999m, .000000001m };
-            yield return new object[] { 1.50, 1.495, .005 };
-            yield return new object[] { 1.5555, 1.5554, .0001 };
-            yield return new object[] { 99.99, .99, 99 };
-            yield return new object[] { 100, 1, 99 };
-            yield return new object[] { 100, .01, 99.99 };
-            yield return new object[] { 100, 20.99, 79.01 };
-            yield return new object[] { 100, 20.99999, 79.00001 };
-            yield return new object[] { 100, 100, 0 };
-            yield return new object[] { 1000000000, .000000001m, 999999999.999999999m };
+            foreach (var testCase in TestData)
+            {
+                yield return testCase;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

@@ -10,13 +10,13 @@ namespace Banking.Tests
     {
         [Theory]
         //Starting positive, ending positive balance
-        [ClassData(typeof(Withdrawal_StartEndPos))]
+        [ClassData(typeof(IndividualInvest_Withdrawal_StartEndPos))]
 
         //Starting positive, ending negative balance
-        [ClassData(typeof(Withdrawal_StartPosEndNeg))]
+        [ClassData(typeof(IndividualInvest_Withdrawal_StartPosEndNeg))]
 
         //Starting negative, ending negative blanace 
-        [ClassData(typeof(Withdrawal_StartEndNeg))]
+        [ClassData(typeof(IndividualInvest_Withdrawal_StartEndNeg))]
 
         public void Withdrawal(decimal startBalance, decimal withdrawalAmount, decimal expectedEndBalance)
         {
@@ -27,12 +27,24 @@ namespace Banking.Tests
         }
 
         [Theory]
+        [InlineData(0, 500.01)]
+        [InlineData(501, 500.01)]
+        [InlineData(100000000, 750)]
+        [InlineData(100000000, 750000000)]
+        [InlineData(0, 750000000)]
+        public void Withdrawal_Over500(decimal startBalance, decimal withdrawalAmount)
+        {
+            var account = new IndividualInvestAccount(startBalance);
+            Assert.Throws<ArgumentOutOfRangeException>(() => account.Withdrawal(withdrawalAmount));
+        }
+
+        [Theory]
         [ClassData(typeof(Withdrawal_InvalidValues))]
 
         public void Withdrawal_InvalidValues(decimal startBalance, decimal withdrawalAmount)
         {
             var account = new IndividualInvestAccount(startBalance);
-            Assert.Throws<ArgumentException>(() => account.Withdrawal(withdrawalAmount));
+            Assert.Throws<ArgumentOutOfRangeException>(() => account.Withdrawal(withdrawalAmount));
         }
 
 
@@ -59,7 +71,7 @@ namespace Banking.Tests
         public void Deposit_InvalidValues(decimal startBalance, decimal depositAmount)
         {
             var account = new IndividualInvestAccount(startBalance);
-            Assert.Throws<ArgumentException>(() => account.Deposit(depositAmount));
+            Assert.Throws<ArgumentOutOfRangeException>(() => account.Deposit(depositAmount));
         }
 
         [Theory]
