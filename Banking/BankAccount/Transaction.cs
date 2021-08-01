@@ -9,7 +9,6 @@ namespace Banking.BankAccount
         TransactionType TransactionType { get; set; }
         Guid SourceAccountId { get; set; }
         Guid DestAccountId { get; set; }
-        DateTime DateInitiated { get; set; }
     }
 
     public class Transaction : ITransaction
@@ -19,6 +18,5 @@ namespace Banking.BankAccount
         public TransactionType TransactionType { get; set; }
         public Guid SourceAccountId { get; set; }
         public Guid DestAccountId { get; set; }
-        public DateTime DateInitiated { get; set; } = DateTime.UtcNow;
     }
 }
