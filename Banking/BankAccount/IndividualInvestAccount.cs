@@ -15,7 +15,7 @@ namespace Banking.BankAccount
             throw new System.NotImplementedException();
         }
 
-        public ITransaction Transfer(decimal amount, IAccount destAccount)
+        public ITransaction Transfer(decimal amount)
         {
             throw new System.NotImplementedException();
         }

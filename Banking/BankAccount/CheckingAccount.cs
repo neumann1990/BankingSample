@@ -49,9 +49,16 @@ namespace Banking.BankAccount
             };
         }
 
-        public ITransaction Transfer(decimal amount, IAccount destAccount)
+        public ITransaction Transfer(decimal amount)
         {
-            throw new System.NotImplementedException();
+            Balance += amount;
+
+            return new Transaction
+            {
+                TransactionType = TransactionType.Transfer,
+                Amount = amount,
+                SourceAccount = this
+            };
         }
     }
 }

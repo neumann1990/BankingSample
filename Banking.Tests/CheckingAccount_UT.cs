@@ -65,5 +65,27 @@ namespace Banking.Tests
             var account = new CheckingAccount(startBalance);
             Assert.Throws<ArgumentException>(() => account.Deposit(depositAmount));
         }
+
+        [Theory]
+        //Source starting positive, ending positive balance
+        [ClassData(typeof(Transfer_StartEndPos))]
+
+        //Source starting positive, ending negative balance
+        [ClassData(typeof(Transfer_StartNegEndPos))]
+
+        //Source starting negative, ending negative blanace 
+        [ClassData(typeof(Transfer_StartEndNeg))]
+        public void Transfer(decimal startBalance,
+                            decimal amount, 
+                            decimal expectedEndBalance)
+        {
+            var account = new CheckingAccount(startBalance);
+
+            var transaction = account.Transfer(amount);
+
+            Assert.Equal(TransactionType.Transfer, transaction.TransactionType);
+            Assert.Equal(amount, transaction.Amount);
+            Assert.Equal(expectedEndBalance, account.Balance);
+        }
     }
 }

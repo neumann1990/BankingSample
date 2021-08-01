@@ -10,6 +10,6 @@ namespace Banking.BankAccount
 
         ITransaction Deposit(decimal amount);
         ITransaction Withdrawal(decimal amount);
-        ITransaction Transfer(decimal transferAmountToDest, IAccount destAccount);
+        ITransaction Transfer(decimal amount);
     }
 }
