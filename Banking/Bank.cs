@@ -1,4 +1,4 @@
-﻿using Banking.BankAccounts;
+﻿using Banking.BankAccount;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,5 +16,10 @@ namespace Banking
         public string Id { get; set; }
         public string Name { get; set; }
         public IEnumerable<IAccount> Accounts { get; set; }
+
+        public void Execute(ITransaction transaction)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

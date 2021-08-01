@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Banking.BankAccounts
+namespace Banking.BankAccount
 {
     public interface ITransaction
     {

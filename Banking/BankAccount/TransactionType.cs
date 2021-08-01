@@ -1,4 +1,4 @@
-﻿namespace Banking.BankAccounts
+﻿namespace Banking.BankAccount
 {
     public enum TransactionType
     {

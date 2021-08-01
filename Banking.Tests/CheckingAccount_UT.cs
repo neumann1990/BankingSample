@@ -1,4 +1,4 @@
-﻿using Banking.BankAccounts;
+﻿using Banking.BankAccount;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,60 +10,60 @@ namespace Banking.Tests
     {
         [Theory]
         //Starting positive, ending positive balance
-        [ClassData(typeof(WithdrawalTestData_StartEndPos))]
+        [ClassData(typeof(Withdrawal_StartEndPos))]
 
         //Starting positive, ending negative balance
-        [ClassData(typeof(WithdrawalTestData_StartPosEndNeg))]
+        [ClassData(typeof(Withdrawal_StartPosEndNeg))]
 
         //Starting negative, ending negative blanace 
-        [ClassData(typeof(WithdrawalTestData_StartEndNeg))]
+        [ClassData(typeof(Withdrawal_StartEndNeg))]
 
         public void Withdrawal(decimal startBalance, decimal withdrawalAmount, decimal expectedEndBalance)
         {
-            var checkingAccount = new CheckingAccount { Balance = startBalance };
+            var checkingAccount = new CheckingAccount(startBalance);
             var transaction = checkingAccount.Withdrawal(withdrawalAmount);
 
+            Assert.Equal(TransactionType.Withdrawal, transaction.TransactionType);
             Assert.Equal(withdrawalAmount, transaction.Amount);
             Assert.Equal(expectedEndBalance, checkingAccount.Balance);
-            Assert.Equal(TransactionType.Withdrawal, transaction.TransactionType);
         }
 
         [Theory]
-        [ClassData(typeof(WithdrawalTestData_InvalidValues))]
+        [ClassData(typeof(Withdrawal_InvalidValues))]
 
         public void Withdrawal_InvalidValues(decimal startBalance, decimal withdrawalAmount)
         {
-            var checkingAccount = new CheckingAccount { Balance = startBalance };
+            var checkingAccount = new CheckingAccount(startBalance);
             Assert.Throws<ArgumentException>(() => checkingAccount.Withdrawal(withdrawalAmount));
         }
 
 
         [Theory]
         //Starting positive, ending positive balance
-        [ClassData(typeof(DepositTestData_StartEndPos))]
+        [ClassData(typeof(Deposit_StartEndPos))]
 
         //Starting positive, ending negative balance
-        [ClassData(typeof(DepositTestData_StartNegEndPos))]
+        [ClassData(typeof(Deposit_StartNegEndPos))]
 
         //Starting negative, ending negative blanace 
-        [ClassData(typeof(DepositTestData_StartEndNeg))]
+        [ClassData(typeof(Deposit_StartEndNeg))]
         public void Deposit(decimal startBalance, decimal depositAmount, decimal expectedEndBalance)
         {
-            var checkingAccount = new CheckingAccount { Balance = startBalance };
-            var transaction = checkingAccount.Deposit(depositAmount);
+            var account = new CheckingAccount(startBalance);
+            var transaction = account.Deposit(depositAmount);
 
-            Assert.Equal(depositAmount, transaction.Amount);
-            Assert.Equal(expectedEndBalance, checkingAccount.Balance);
             Assert.Equal(TransactionType.Deposit, transaction.TransactionType);
+            Assert.Equal(depositAmount, transaction.Amount);
+            Assert.Equal(expectedEndBalance, account.Balance);
         }
 
         [Theory]
-        [ClassData(typeof(DepositTestData_InvalidValues))]
+        [ClassData(typeof(Deposit_InvalidValues))]
 
         public void Deposit_InvalidValues(decimal startBalance, decimal depositAmount)
         {
-            var checkingAccount = new CheckingAccount { Balance = startBalance };
-            Assert.Throws<ArgumentException>(() => checkingAccount.Deposit(depositAmount));
+            var account = new CheckingAccount(startBalance);
+            Assert.Throws<ArgumentException>(() => account.Deposit(depositAmount));
         }
     }
 }
