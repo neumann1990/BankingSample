@@ -10,12 +10,19 @@ namespace Banking.BankAccounts
 
         public ITransaction Deposit(decimal amount)
         {
-            throw new System.NotImplementedException();
-        }
+            if (amount <= 0)
+            {
+                throw new ArgumentException("Deposit amount must be a positive value");
+            }
 
-        public ITransaction Transfer(decimal amount, IAccount destAccount)
-        {
-            throw new System.NotImplementedException();
+            Balance += amount;
+
+            return new Transaction
+            {
+                TransactionType = TransactionType.Deposit,
+                Amount = amount,
+                SourceAccount = this
+            };
         }
 
         public ITransaction Withdrawal(decimal amount)
@@ -29,9 +36,15 @@ namespace Banking.BankAccounts
 
             return new Transaction
             {
+                TransactionType = TransactionType.Withdrawal,
                 Amount = amount,
                 SourceAccount = this
             };
+        }
+
+        public ITransaction Transfer(decimal amount, IAccount destAccount)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

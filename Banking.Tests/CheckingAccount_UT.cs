@@ -25,6 +25,7 @@ namespace Banking.Tests
 
             Assert.Equal(withdrawalAmount, transaction.Amount);
             Assert.Equal(expectedEndBalance, checkingAccount.Balance);
+            Assert.Equal(TransactionType.Withdrawal, transaction.TransactionType);
         }
 
         [Theory]
@@ -34,6 +35,35 @@ namespace Banking.Tests
         {
             var checkingAccount = new CheckingAccount { Balance = startBalance };
             Assert.Throws<ArgumentException>(() => checkingAccount.Withdrawal(withdrawalAmount));
+        }
+
+
+        [Theory]
+        //Starting positive, ending positive balance
+        [ClassData(typeof(DepositTestData_StartEndPos))]
+
+        //Starting positive, ending negative balance
+        [ClassData(typeof(DepositTestData_StartNegEndPos))]
+
+        //Starting negative, ending negative blanace 
+        [ClassData(typeof(DepositTestData_StartEndNeg))]
+        public void Deposit(decimal startBalance, decimal depositAmount, decimal expectedEndBalance)
+        {
+            var checkingAccount = new CheckingAccount { Balance = startBalance };
+            var transaction = checkingAccount.Deposit(depositAmount);
+
+            Assert.Equal(depositAmount, transaction.Amount);
+            Assert.Equal(expectedEndBalance, checkingAccount.Balance);
+            Assert.Equal(TransactionType.Deposit, transaction.TransactionType);
+        }
+
+        [Theory]
+        [ClassData(typeof(DepositTestData_InvalidValues))]
+
+        public void Deposit_InvalidValues(decimal startBalance, decimal depositAmount)
+        {
+            var checkingAccount = new CheckingAccount { Balance = startBalance };
+            Assert.Throws<ArgumentException>(() => checkingAccount.Deposit(depositAmount));
         }
     }
 }

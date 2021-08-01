@@ -7,7 +7,7 @@ namespace Banking.Tests
     {
         public IEnumerator<object[]> GetEnumerator()
         {
-            yield return new object[] { 1, .9999999, .0000001 };
+            yield return new object[] { 1, .999999999m, .000000001m };
             yield return new object[] { 1.50, 1.495, .005 };
             yield return new object[] { 1.5555, 1.5554, .0001 };
             yield return new object[] { 99.99, .99, 99 };
