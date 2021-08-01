@@ -1,8 +1,10 @@
-﻿namespace Banking.BankAccounts
+﻿using System;
+
+namespace Banking.BankAccounts
 {
     public class CheckingAccount : IAccount
     {
-        public string Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
         public IOwner Owner { get; set; }
         public decimal Balance { get; set; }
 
@@ -18,7 +20,18 @@
 
         public ITransaction Withdrawal(decimal amount)
         {
-            throw new System.NotImplementedException();
+            if(amount <= 0)
+            {
+                throw new ArgumentException("Withdrawal amount must be a positive value");
+            }
+
+            Balance -= amount;
+
+            return new Transaction
+            {
+                Amount = amount,
+                SourceAccount = this
+            };
         }
     }
 }
