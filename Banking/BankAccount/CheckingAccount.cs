@@ -10,12 +10,17 @@ namespace Banking.BankAccount
 
         public CheckingAccount() { }
 
+        public CheckingAccount(Guid id)
+        {
+            Id = id;
+        }
+
         public CheckingAccount(decimal balance)
         {
             Balance = balance;
         }
 
-        public ITransaction Deposit(decimal amount)
+        public void Deposit(decimal amount)
         {
             if (amount <= 0)
             {
@@ -23,16 +28,9 @@ namespace Banking.BankAccount
             }
 
             Balance += amount;
-
-            return new Transaction
-            {
-                TransactionType = TransactionType.Deposit,
-                Amount = amount,
-                SourceAccount = this
-            };
         }
 
-        public ITransaction Withdrawal(decimal amount)
+        public void Withdrawal(decimal amount)
         {
             if(amount <= 0)
             {
@@ -40,25 +38,11 @@ namespace Banking.BankAccount
             }
 
             Balance -= amount;
-
-            return new Transaction
-            {
-                TransactionType = TransactionType.Withdrawal,
-                Amount = amount,
-                SourceAccount = this
-            };
         }
 
-        public ITransaction Transfer(decimal amount)
+        public void Transfer(decimal amount)
         {
             Balance += amount;
-
-            return new Transaction
-            {
-                TransactionType = TransactionType.Transfer,
-                Amount = amount,
-                SourceAccount = this
-            };
         }
     }
 }

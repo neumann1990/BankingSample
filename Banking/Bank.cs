@@ -1,6 +1,7 @@
 ﻿using Banking.BankAccount;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Banking
@@ -19,7 +20,32 @@ namespace Banking
 
         public void Execute(ITransaction transaction)
         {
-            throw new NotImplementedException();
+            var sourceAccount = Accounts.SingleOrDefault(a => a.Id == transaction.SourceAccountId);
+
+            if(sourceAccount == null)
+            {
+                throw new KeyNotFoundException($"SourceAccount {transaction.SourceAccountId} not found");
+            }
+
+            switch (transaction.TransactionType)
+            {
+                case TransactionType.Withdrawal:
+                    sourceAccount.Withdrawal(transaction.Amount);
+                    break;
+                case TransactionType.Deposit:
+                    sourceAccount.Deposit(transaction.Amount);
+                    break;
+                case TransactionType.Transfer:
+                    var destAccount = Accounts.SingleOrDefault(a => a.Id == transaction.DestAccountId);
+                    if (destAccount == null)
+                    {
+                        throw new KeyNotFoundException($"SourceAccount {transaction.SourceAccountId} not found");
+                    }
+
+                    sourceAccount.Transfer(-transaction.Amount);
+                    destAccount.Transfer(transaction.Amount);
+                    break;
+            }
         }
     }
 }

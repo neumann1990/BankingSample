@@ -8,8 +8,8 @@ namespace Banking.BankAccount
         IOwner Owner { get; }
         decimal Balance { get; }
 
-        ITransaction Deposit(decimal amount);
-        ITransaction Withdrawal(decimal amount);
-        ITransaction Transfer(decimal amount);
+        void Deposit(decimal amount);
+        void Withdrawal(decimal amount);
+        void Transfer(decimal amount);
     }
 }

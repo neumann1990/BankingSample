@@ -21,10 +21,8 @@ namespace Banking.Tests
         public void Withdrawal(decimal startBalance, decimal withdrawalAmount, decimal expectedEndBalance)
         {
             var checkingAccount = new CheckingAccount(startBalance);
-            var transaction = checkingAccount.Withdrawal(withdrawalAmount);
+            checkingAccount.Withdrawal(withdrawalAmount);
 
-            Assert.Equal(TransactionType.Withdrawal, transaction.TransactionType);
-            Assert.Equal(withdrawalAmount, transaction.Amount);
             Assert.Equal(expectedEndBalance, checkingAccount.Balance);
         }
 
@@ -50,10 +48,8 @@ namespace Banking.Tests
         public void Deposit(decimal startBalance, decimal depositAmount, decimal expectedEndBalance)
         {
             var account = new CheckingAccount(startBalance);
-            var transaction = account.Deposit(depositAmount);
+            account.Deposit(depositAmount);
 
-            Assert.Equal(TransactionType.Deposit, transaction.TransactionType);
-            Assert.Equal(depositAmount, transaction.Amount);
             Assert.Equal(expectedEndBalance, account.Balance);
         }
 
@@ -81,10 +77,8 @@ namespace Banking.Tests
         {
             var account = new CheckingAccount(startBalance);
 
-            var transaction = account.Transfer(amount);
+            account.Transfer(amount);
 
-            Assert.Equal(TransactionType.Transfer, transaction.TransactionType);
-            Assert.Equal(amount, transaction.Amount);
             Assert.Equal(expectedEndBalance, account.Balance);
         }
     }

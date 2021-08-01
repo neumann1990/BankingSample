@@ -8,17 +8,29 @@ namespace Banking.BankAccount
         public IOwner Owner { get; private set; }
         public decimal Balance { get; private set; }
 
-        public ITransaction Deposit(decimal amount)
+        public CorporateInvestAccount() { }
+
+        public CorporateInvestAccount(Guid id)
+        {
+            Id = id;
+        }
+
+        public CorporateInvestAccount(decimal balance)
+        {
+            Balance = balance;
+        }
+
+        public void Deposit(decimal amount)
         {
             throw new System.NotImplementedException();
         }
 
-        public ITransaction Transfer(decimal amount)
+        public void Transfer(decimal amount)
         {
             throw new System.NotImplementedException();
         }
 
-        public ITransaction Withdrawal(decimal amount)
+        public void Withdrawal(decimal amount)
         {
             throw new System.NotImplementedException();
         }
