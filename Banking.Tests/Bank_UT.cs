@@ -128,5 +128,18 @@ namespace Banking.Tests
 
             Assert.Throws<KeyNotFoundException>(() => _testObject.Execute(transaction));
         }
+
+        [Theory]
+        [InlineData("e5ea78cd-6742-470b-97f6-9ec2cc307359")]
+        public void Execute_ThrowsInvalidTransactionType(string sourceAccountId)
+        {
+            var transaction = new Transaction
+            {
+                TransactionType = TransactionType.Unknown,
+                SourceAccountId = Guid.Parse(sourceAccountId),
+            };
+
+            Assert.Throws<ArgumentException>(() => _testObject.Execute(transaction));
+        }
     }
 }

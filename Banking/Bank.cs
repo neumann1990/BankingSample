@@ -45,6 +45,8 @@ namespace Banking
                     sourceAccount.Transfer(-transaction.Amount);
                     destAccount.Transfer(transaction.Amount);
                     break;
+                default:
+                    throw new ArgumentException("Unknown transaction type");
             }
         }
     }
